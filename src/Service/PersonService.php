@@ -13,6 +13,8 @@ class PersonService
     /** @var EntityManagerInterface */
     protected $em;
 
+    const NB_PEOPLE_PER_PAGE = 10;
+
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
@@ -24,6 +26,15 @@ class PersonService
     public function findAllPeople(): array
     {
         return $this->em->getRepository(Person::class)->findAll();
+    }
+
+    public function getPeopleFromPage(int $page, int $limit = self::NB_PEOPLE_PER_PAGE)
+    {
+        if ($page === 0) {
+            $page = 1;
+        }
+        $offset = $limit * ($page - 1);
+        return $this->em->getRepository(Person::class)->findBy([], [], $limit, $offset);
     }
 
     /**

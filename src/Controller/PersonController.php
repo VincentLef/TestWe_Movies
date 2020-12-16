@@ -37,6 +37,33 @@ class PersonController extends AbstractController
     }
 
     /**
+     * @Route("/list/page/{page}", name="listPersonFromPage", requirements={"page"="\d+"})
+     * @Template("Person/index.html.twig")
+     * @param PersonService $personService
+     * @param int $page
+     * @return array
+     */
+    public function listFromPage(PersonService $personService, int $page): array
+    {
+        $people = $personService->getPeopleFromPage($page);
+        return ["people" => $people];
+    }
+
+    /**
+     * @Route("/list/page/{page}/limit/{limit}", name="listPersonFromPageAndLimit", requirements={"page"="\d+", "limit"="\d+"})
+     * @Template("Person/index.html.twig")
+     * @param PersonService $personService
+     * @param int $page
+     * @param int $limit
+     * @return array
+     */
+    public function listFromPageAndLimit(PersonService $personService, int $page, int $limit): array
+    {
+        $people = $personService->getPeopleFromPage($page, $limit);
+        return ["people" => $people];
+    }
+
+    /**
      * @Route("/new", name="newPerson")
      *
      * @param PersonService $personService
