@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="clearfix"></div>
+    <div class="table">
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Is 3D ?</th>
+                <th>Room Id</th>
+                <th>Movie</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for showing in showings %}
+                <tr>
+                    <td>{{ showing.id }}</td>
+                    <td>{{ showing.date|date("Y-m-d H:i:s") }}</td>
+                    <td>
+                        {% if showing.is3D == 1 %}
+                            {% set is3D = "yes" %}
+                        {% else %}
+                            {% set is3D = "no" %}
+                        {% endif %}
+                        {{ is3D }}
+                    </td>
+                    <td>{{ showing.room.id }}</td>
+                    <td><a href="{{ path("viewMovie", {"id": showing.movie.id}) }}">{{ showing.movie.title }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
