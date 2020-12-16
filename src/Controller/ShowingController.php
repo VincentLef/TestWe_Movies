@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShowingController extends AbstractController
 {
     /**
-     * @Route("/", name="listMovie")
+     * @Route("/", name="listShowing")
      * @Template("Showing/index.html.twig")
      * @param ShowingService $showingService
      * @return array
