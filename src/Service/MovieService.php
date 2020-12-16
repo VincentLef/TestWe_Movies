@@ -26,13 +26,13 @@ class MovieService
         return $this->getMovieRepository()->findAll();
     }
 
-    public function getMoviesFromPage(int $page)
+    public function getMoviesFromPage(int $page, int $limit = self::NB_MOVIES_PER_PAGE)
     {
         if ($page === 0) {
             $page = 1;
         }
-        $offset = self::NB_MOVIES_PER_PAGE * ($page - 1);
-        return $this->getMovieRepository()->findBy([], [], self::NB_MOVIES_PER_PAGE, $offset);
+        $offset = $limit * ($page - 1);
+        return $this->getMovieRepository()->findBy([], [], $limit, $offset);
     }
 
     public function getMovieRepository() {
