@@ -26,6 +26,13 @@ class MovieService
         return $this->getMovieRepository()->findAll();
     }
 
+    public function getMovieFromId(int $id) {
+        if ($id === 0) {
+            $id = 1;
+        }
+        return $this->getMovieRepository()->find($id);
+    }
+
     public function getMoviesFromPage(int $page, int $limit = self::NB_MOVIES_PER_PAGE)
     {
         if ($page === 0) {
