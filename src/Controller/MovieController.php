@@ -33,6 +33,19 @@ class MovieController extends AbstractController
     }
 
     /**
+     * @Route("/list/page/{page}", name="listMovieFromPage", requirements={"page"="\d+"})
+     * @Template("Movie/index.html.twig")
+     * @param MovieService $movieService
+     * @param int $page
+     * @return array
+     */
+    public function list(MovieService  $movieService, int $page): array
+    {
+        $movies = $movieService->getMoviesFromPage($page);
+        return ["movies" => $movies];
+    }
+
+    /**
      * @Route("/new", name="newMovie")
      * @param MovieService $movieService
      * @param Request $request
